@@ -68,6 +68,7 @@ export type Service = {
   id: Scalars['String']
   name: Scalars['String']
   link: Scalars['String']
+  categories: Array<Category>
 }
 
 export type Subscription = {
@@ -274,6 +275,11 @@ export type ServiceResolvers<
   id: Resolver<ResolversTypes['String'], ParentType, ContextType>
   name: Resolver<ResolversTypes['String'], ParentType, ContextType>
   link: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  categories: Resolver<
+    Array<ResolversTypes['Category']>,
+    ParentType,
+    ContextType
+  >
 }
 
 export type SubscriptionResolvers<

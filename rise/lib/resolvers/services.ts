@@ -1,12 +1,13 @@
 import { gql } from 'apollo-server-express'
 import { QueryResolvers } from '../__generated__/graphql'
+import { mockServices } from '../mocks'
 
 export const typeDefs = gql`
   type Service {
     id: String!
     name: String!
     link: String!
-    categories: [Category]
+    categories: [Category!]!
   }
 
   extend type Query {
@@ -20,18 +21,6 @@ interface Resolvers {
 
 export const resolvers: Resolvers = {
   Query: {
-    services: () => [
-      {
-        id: '1337-1337-1337',
-        name: 'Mindfulness-appen',
-        link: 'google.se',
-        categories: [
-          {
-            id: '1337-1338',
-            name: 'Mindfulness',
-          },
-        ],
-      },
-    ],
+    services: () => mockServices,
   },
 }
