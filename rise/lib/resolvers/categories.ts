@@ -5,7 +5,7 @@ import { mockCategories } from '../mocks'
 export const typeDefs = gql`
   type Category {
     id: String!
-    name: String!
+    label: String!
   }
 
   extend type Query {

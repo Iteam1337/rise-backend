@@ -9,9 +9,9 @@
   "scripts": {
     "dev": "ts-node-dev --no-notify --ignore-watch node_modules lib/server.ts",
     "generate": "graphql-codegen --config codegen.yml",
+    "seed": "knex seed:run --env dev",
     "migrate:up": "knex migrate:latest --env dev",
-    "migrate:down": "knex migrate:rollback --all --env dev",
-    "migrate": "DATABASE_URL=\"postgres://iteamadmin:;adminadmin1337@localhost:5432/brevduvor\" && node-pg-migrate"
+    "migrate:down": "knex migrate:rollback --all --env dev"
   },
   "keywords": [
     "graphql",
@@ -20,12 +20,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/dedent": "^0.7.0",
     "apollo-server-express": "2.9.6",
+    "dedent": "^0.7.0",
     "express": "4.17.1",
     "knex": "^0.21.1",
     "lodash.merge": "4.6.2",
-    "node-pg-migrate": "^5.0.0",
-    "pg": "^8.2.1"
+    "pg": "^8.2.1",
+    "pg-promise": "^10.5.6"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.8.1",

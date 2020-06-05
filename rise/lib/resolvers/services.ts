@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express'
 import { QueryResolvers } from '../__generated__/graphql'
-import { mockServices } from '../mocks'
+import { getAllServices } from '../services/riseServices'
 
 export const typeDefs = gql`
   type Service {
@@ -21,6 +21,6 @@ interface Resolvers {
 
 export const resolvers: Resolvers = {
   Query: {
-    services: () => mockServices,
+    services: () => getAllServices(),
   },
 }
