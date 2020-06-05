@@ -1,10 +1,11 @@
 import { gql } from 'apollo-server-express'
 import { QueryResolvers, MutationResolvers } from '../__generated__/graphql'
+import { getQuestions } from '../services/questions'
 
 export const typeDefs = gql`
   type Question {
     id: String!
-    text: String!
+    question: String!
   }
 
   input Answer {
@@ -32,12 +33,7 @@ interface Resolvers {
 
 export const resolvers: Resolvers = {
   Query: {
-    questions: () => [
-      {
-        id: '1337-1337-1337',
-        text: 'Jag undrar vad du äter',
-      },
-    ],
+    questions: () => getQuestions()
   },
   Mutation: {
     sendAnswers: (_, { input }) => {
