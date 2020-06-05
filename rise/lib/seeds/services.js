@@ -45,15 +45,3 @@ exports.seed = function(knex) {
       )
     })
 }
-
-
-// // table
-// // .uuid('id')
-// // .primary()
-// // .notNullable()
-// // .defaultTo(knex.raw('uuid_generate_v4()'))
-// // table.string('name', 1000).notNullable()
-// // table.string('contact', 128).notNullable()
-// // table.string('link', 128).notNullable()
-// // table.specificType('allowed_spectators', 'UUID[]')
-// // table.timestamp('created_at').defaultTo(knex.fn.now()).notNullable()
