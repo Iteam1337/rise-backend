@@ -3,7 +3,7 @@ import dedent from 'dedent'
 
 
 export async function getAllServices(): Promise<any[]> {
-  const abba = await db.manyOrNone(
+  return await db.manyOrNone(
     dedent`
     SELECT
       DISTINCT ON (s.id)
@@ -16,7 +16,4 @@ export async function getAllServices(): Promise<any[]> {
       LEFT JOIN categories c
       ON c.id = ANY(s.categories)
   `)
-
-  console.log(abba)
-  return abba
 }
