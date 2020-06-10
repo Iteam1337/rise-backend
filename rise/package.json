@@ -33,6 +33,7 @@
     "@graphql-codegen/cli": "1.8.1",
     "@graphql-codegen/typescript": "1.8.1",
     "@graphql-codegen/typescript-resolvers": "1.8.1",
+    "@iteam/config": "^12.1.1",
     "@iteam/eslint-config-node": "0.3.0",
     "@types/lodash.merge": "4.6.6",
     "eslint": "7.0.0",
