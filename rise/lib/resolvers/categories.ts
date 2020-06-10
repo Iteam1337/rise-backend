@@ -6,6 +6,8 @@ export const typeDefs = gql`
   type Category {
     id: String!
     label: String!
+    introduction: String!
+    information: String!
   }
 
   extend type Query {
