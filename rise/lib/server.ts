@@ -1,4 +1,6 @@
 import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
 import { ApolloServer, gql } from 'apollo-server-express'
 import {
   typeDefs as questionDefs,
@@ -36,6 +38,38 @@ const server = new ApolloServer({
 })
 
 const app = express()
+
+app.use(cors())
+app.use(bodyParser.json())
+
+const validateUserToken = (token: string) => token.startsWith('OK')
+
+app.post('/api/registration/:app_id', (req, res) => {
+  const {
+    body: { token: userToken },
+  } = req
+
+  console.log('UserToken:', userToken)
+
+  res.status(200).json({
+    status: 'success',
+    data: true,
+  })
+})
+
+app.get('/api/token/:id', (req, res) => {
+  if (validateUserToken(req.params && req.params.id)) {
+    res.status(200).json({
+      status: 'success',
+      data: true,
+    })
+  } else {
+    res.status(401).json({
+      status: 'error',
+      data: false,
+    })
+  }
+})
 
 server.applyMiddleware({ app })
 
