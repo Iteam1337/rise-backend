@@ -14,12 +14,13 @@ export type Scalars = {
 
 
 export type Answer = {
-  id: Scalars['String'],
   text: Scalars['String'],
+  id: Scalars['String'],
 };
 
 export type Answers = {
-  Answers: Maybe<Array<Maybe<Answer>>>,
+  answers: Maybe<Array<Maybe<Answer>>>,
+  user: Scalars['String'],
 };
 
 export type AuthPayload = {
@@ -42,6 +43,12 @@ export type Category = {
   information: Scalars['String'],
 };
 
+export type LatestAnswerResponse = {
+   __typename?: 'latestAnswerResponse',
+  createdAt: Scalars['String'],
+  user: Scalars['String'],
+};
+
 export type LogoutResponse = {
    __typename?: 'LogoutResponse',
   status: Scalars['String'],
@@ -52,6 +59,7 @@ export type Mutation = {
    __typename?: 'Mutation',
   _empty: Maybe<Scalars['String']>,
   sendAnswers: Scalars['Boolean'],
+  latestAnswer: Maybe<LatestAnswerResponse>,
   login: AuthPayload,
   register: AuthPayload,
 };
@@ -59,6 +67,11 @@ export type Mutation = {
 
 export type MutationSendAnswersArgs = {
   input: Answers
+};
+
+
+export type MutationLatestAnswerArgs = {
+  id: Scalars['String']
 };
 
 
@@ -184,6 +197,7 @@ export type ResolversTypes = {
   Answers: Answers,
   Answer: Answer,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  latestAnswerResponse: ResolverTypeWrapper<LatestAnswerResponse>,
   userInput: UserInput,
   AuthPayload: ResolverTypeWrapper<AuthPayload>,
   ID: ResolverTypeWrapper<Scalars['ID']>,
@@ -205,6 +219,7 @@ export type ResolversParentTypes = {
   Answers: Answers,
   Answer: Answer,
   Boolean: Scalars['Boolean'],
+  latestAnswerResponse: LatestAnswerResponse,
   userInput: UserInput,
   AuthPayload: AuthPayload,
   ID: Scalars['ID'],
@@ -231,6 +246,11 @@ export type CategoryResolvers<ContextType = any, ParentType extends ResolversPar
   information: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 };
 
+export type LatestAnswerResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['latestAnswerResponse'] = ResolversParentTypes['latestAnswerResponse']> = {
+  createdAt: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  user: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+};
+
 export type LogoutResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LogoutResponse'] = ResolversParentTypes['LogoutResponse']> = {
   status: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   message: Resolver<ResolversTypes['String'], ParentType, ContextType>,
@@ -239,6 +259,7 @@ export type LogoutResponseResolvers<ContextType = any, ParentType extends Resolv
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   sendAnswers: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSendAnswersArgs, 'input'>>,
+  latestAnswer: Resolver<Maybe<ResolversTypes['latestAnswerResponse']>, ParentType, ContextType, RequireFields<MutationLatestAnswerArgs, 'id'>>,
   login: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, MutationLoginArgs>,
   register: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'input'>>,
 };
@@ -273,6 +294,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type Resolvers<ContextType = any> = {
   AuthPayload: AuthPayloadResolvers<ContextType>,
   Category: CategoryResolvers<ContextType>,
+  latestAnswerResponse: LatestAnswerResponseResolvers<ContextType>,
   LogoutResponse: LogoutResponseResolvers<ContextType>,
   Mutation: MutationResolvers<ContextType>,
   Query: QueryResolvers<ContextType>,
