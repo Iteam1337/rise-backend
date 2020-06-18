@@ -23,7 +23,10 @@ export const typeDefs = gql`
   }
 `
 
-const login: MutationResolvers['login'] = async (_parent, { input }) => {
+const login: MutationResolvers['login'] = async (
+  _parent,
+  { input }
+): Promise<any> => {
   if (input) {
     const { email, password } = input
     const data = await auth.login(email, password)
