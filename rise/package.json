@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "ts-node-dev --no-notify --ignore-watch node_modules lib/server.ts",
+    "dev": "ts-node-dev --type-check --no-notify --ignore-watch node_modules lib/server.ts",
     "generate": "graphql-codegen --config codegen.yml",
     "seed": "knex seed:run --env dev",
     "migrate:up": "knex migrate:latest --env dev",
