@@ -50,10 +50,7 @@ const authenticate = async (email: string, password: string) => {
   return res as User
 }
 
-export const login = async (
-  email: string,
-  password: string
-): Promise<any> => {
+export const login = async (email: string, password: string) => {
   const user = await authenticate(email, password)
 
   const tokenPayload = {
@@ -72,7 +69,7 @@ export const login = async (
 
 export const register = async (
   email: string,
-  password: string,
+  password: string
 ): Promise<any> => {
   const res = await getUserByEmail(email)
   const userExists = res && res.email === email
