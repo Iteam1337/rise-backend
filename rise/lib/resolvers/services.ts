@@ -3,13 +3,6 @@ import { QueryResolvers } from '../__generated__/graphql'
 import { getAllServices } from '../services/riseServices'
 
 export const typeDefs = gql`
-  type Service {
-    id: String!
-    name: String!
-    link: String!
-    categories: [Category!]!
-  }
-
   extend type Query {
     services: [Service!]!
   }

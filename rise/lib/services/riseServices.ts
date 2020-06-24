@@ -17,3 +17,14 @@ export async function getAllServices(): Promise<any[]> {
       ON c.id = ANY(s.categories)
   `)
 }
+
+export async function getServicesByCategory (categoryId: string) {
+  return db.manyOrNone(
+    dedent`
+    SELECT
+	    s.*
+    FROM services s WHERE $1 = ANY(s.categories)
+    `,
+    [categoryId]
+  )
+}

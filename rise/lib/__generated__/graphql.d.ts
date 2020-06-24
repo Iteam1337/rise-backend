@@ -41,6 +41,7 @@ export type Category = {
   label: Scalars['String'],
   introduction: Scalars['String'],
   information: Scalars['String'],
+  services: Maybe<Array<Maybe<Service>>>,
 };
 
 export type LatestAnswerResponse = {
@@ -89,7 +90,13 @@ export type Query = {
   _empty: Maybe<Scalars['String']>,
   questions: Array<Question>,
   categories: Array<Category>,
+  categoryAndRelated: Category,
   services: Array<Service>,
+};
+
+
+export type QueryCategoryAndRelatedArgs = {
+  id: Scalars['String']
 };
 
 export type Question = {
@@ -244,6 +251,7 @@ export type CategoryResolvers<ContextType = any, ParentType extends ResolversPar
   label: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   introduction: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   information: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  services: Resolver<Maybe<Array<Maybe<ResolversTypes['Service']>>>, ParentType, ContextType>,
 };
 
 export type LatestAnswerResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['latestAnswerResponse'] = ResolversParentTypes['latestAnswerResponse']> = {
@@ -268,6 +276,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   _empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   questions: Resolver<Array<ResolversTypes['Question']>, ParentType, ContextType>,
   categories: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>,
+  categoryAndRelated: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<QueryCategoryAndRelatedArgs, 'id'>>,
   services: Resolver<Array<ResolversTypes['Service']>, ParentType, ContextType>,
 };
 

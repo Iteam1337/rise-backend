@@ -13,3 +13,18 @@ export async function getCategories(): Promise<any[]> {
   `
   )
 }
+
+export async function getCategoryById(categoryId: string): Promise<any[]> {
+  return db.one(
+    dedent`
+        SELECT
+      id,
+      label,
+      introduction,
+      information
+    FROM categories
+    WHERE id = $1
+    `,
+    [categoryId]
+  )
+}
