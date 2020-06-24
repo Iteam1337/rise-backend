@@ -7,7 +7,7 @@ export const typeDefs = gql`
     id: String!
     name: String!
     link: String!
-    categories: [Category!]!
+    categories: [String!]!
   }
 
   extend type Query {
