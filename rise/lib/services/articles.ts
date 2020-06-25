@@ -1,8 +1,9 @@
 import { db } from '../adapters/postgres'
 import dedent from 'dedent'
 import camelcaseKeys from 'camelcase-keys'
+import { Article } from '../__generated__/graphql'
 
-export async function getArticles(): Promise<any[]> {
+export async function getArticles(): Promise<Article[]> {
   const data = await db.manyOrNone(
     dedent`
       SELECT

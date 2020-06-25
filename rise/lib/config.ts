@@ -10,11 +10,13 @@ const config = require('@iteam/config')({
       HOST: 'localhost',
       MAX: 20,
       timeout: 30000,
-    }
+    },
+    JWT_PRIVATE_KEY: 'jwtdevkey',
   },
 })
 
 export default {
   PORT: config.get('PORT'),
-  POSTGRES: config.get('POSTGRES')
+  POSTGRES: config.get('POSTGRES'),
+  JWT_SECRET: config.get('jwtPrivateKey')
 }
