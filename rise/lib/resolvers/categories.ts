@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-express'
-import { QueryResolvers } from '../__generated__/graphql'
 import { getCategories, getCategoryById } from '../services/categories'
 import { getServicesByCategory } from '../services/riseServices'
 
@@ -25,14 +24,10 @@ export const typeDefs = gql`
   }
 `
 
-interface Resolvers {
-  Query: QueryResolvers
-}
-
-export const resolvers: Resolvers = {
+export const resolvers = {
   Query: {
-    categories: () => getCategories(),
-    categoryAndRelated: async (_, { id }) => {
+    categories: () => getCategories,
+    categoryAndRelated: async (_ : any, { id }: { id: string }) => {
       const category = await getCategoryById(id)
       const services = await getServicesByCategory(id)
 

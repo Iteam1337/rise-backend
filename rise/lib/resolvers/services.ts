@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-express'
-import { QueryResolvers } from '../__generated__/graphql'
 import { getAllServices } from '../services/riseServices'
 
 export const typeDefs = gql`
@@ -8,12 +7,8 @@ export const typeDefs = gql`
   }
 `
 
-interface Resolvers {
-  Query: QueryResolvers
-}
-
-export const resolvers: Resolvers = {
+export const resolvers = {
   Query: {
-    services: () => getAllServices(),
+    services: getAllServices,
   },
 }

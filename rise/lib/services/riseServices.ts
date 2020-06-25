@@ -1,8 +1,11 @@
 import { db } from '../adapters/postgres'
 import dedent from 'dedent'
+import { QueryResolvers } from '../__generated__/graphql'
 
-
-export async function getAllServices(): Promise<any[]> {
+export const getAllServices: QueryResolvers['services'] = async (
+  _parent,
+  _args
+) => {
   return await db.manyOrNone(
     dedent`
     SELECT
@@ -15,7 +18,8 @@ export async function getAllServices(): Promise<any[]> {
     FROM services s
       LEFT JOIN categories c
       ON c.id = ANY(s.categories)
-  `)
+  `
+  )
 }
 
 export async function getServicesByCategory (categoryId: string) {
