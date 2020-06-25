@@ -1,16 +1,17 @@
 import { db, pgp } from '../adapters/postgres'
 import dedent from 'dedent'
 import camelcaseKeys from 'camelcase-keys'
+import { QueryResolvers } from '../__generated__/graphql'
 
-
-export async function getQuestions(): Promise<any[]> {
+export const getQuestions: QueryResolvers['questions'] = async () => {
   return await db.manyOrNone(
     dedent`
     SELECT
       id,
       question
     FROM questions
-  `)
+  `
+  )
 }
 
 export async function latestAnswerByUser(id: string): Promise<any[]> {

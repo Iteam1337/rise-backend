@@ -1,5 +1,5 @@
 import * as auth from '../services/auth'
-import { QueryResolvers, MutationResolvers } from '../__generated__/graphql'
+import { MutationResolvers, AuthPayload } from '../__generated__/graphql'
 import { gql } from 'apollo-server-express'
 
 export const typeDefs = gql`
@@ -23,27 +23,32 @@ export const typeDefs = gql`
   }
 `
 
-
-interface Resolvers {
-  Query: QueryResolvers
-  Mutation: MutationResolvers
+const login: MutationResolvers['login'] = async (
+  _parent,
+  { input }
+): Promise<AuthPayload> => {
+  if (input) {
+    const { email, password } = input
+    const data = await auth.login(email, password)
+    return data
+  } else {
+    throw new Error()
+  }
 }
 
-export const resolvers: Resolvers = {
-  Mutation: {
-    login: async (_, { input } : any) => {
-     const { email, password } = input
-     const data = await auth.login(email, password)
-     return data
-    },
-    register: async (_, { input }: any) => {
-      const { email, password } = input
+const register: MutationResolvers['register'] = async (_parent, { input }) => {
+  const { email, password } = input
 
-      if (email) {
-          const result = await auth.register(email,password)
-          console.log(result)
-          return result
-      }
-    }
+  if (email) {
+    const result = await auth.register(email, password)
+    console.log(result)
+    return result
   }
+}
+
+export const resolvers = {
+  Mutation: {
+    login,
+    register,
+  },
 }

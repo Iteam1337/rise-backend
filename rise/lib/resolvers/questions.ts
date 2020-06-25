@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-express'
-import { QueryResolvers, MutationResolvers } from '../__generated__/graphql'
 import { getQuestions, saveAnswers, latestAnswerByUser } from '../services/questions'
 
 export const typeDefs = gql`
@@ -33,21 +32,17 @@ export const typeDefs = gql`
   }
 `
 
-interface Resolvers {
-  Query: QueryResolvers
-  Mutation: MutationResolvers
-}
 
-export const resolvers: Resolvers = {
+export const resolvers = {
   Query: {
-    questions: () => getQuestions()
+    questions: getQuestions,
   },
   Mutation: {
-    sendAnswers: async (_, { input: { answers, user } }) => {
+    sendAnswers: async (_ : any, { input: { answers, user } } : any) => {
       await saveAnswers(user, answers)
 
       return true
     },
-    latestAnswer: async (_, { id }) => latestAnswerByUser(id)
+    latestAnswer: async (_ : any, { id } : { id: string }) => latestAnswerByUser(id)
   },
 }
