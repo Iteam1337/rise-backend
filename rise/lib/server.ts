@@ -15,6 +15,11 @@ import {
   resolvers as serviceResolvers,
 } from './resolvers/services'
 
+import {
+  typeDefs as authDefs,
+  resolvers as authResolvers
+} from './resolvers/auth'
+
 import merge from 'lodash.merge'
 import http from 'http'
 
@@ -33,8 +38,9 @@ const typeDefs = gql`
 `
 
 const server = new ApolloServer({
-  typeDefs: [typeDefs, questionDefs, categoryDefs, serviceDefs],
-  resolvers: merge([questionResolvers, categoryResolvers, serviceResolvers]),
+  typeDefs: [typeDefs, questionDefs, categoryDefs, serviceDefs, authDefs
+  ],
+  resolvers: merge([questionResolvers, categoryResolvers, serviceResolvers, authResolvers]),
 })
 
 const app = express()
