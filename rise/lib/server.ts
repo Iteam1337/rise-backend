@@ -10,10 +10,11 @@ import {
   typeDefs as categoryDefs,
   resolvers as categoryResolvers,
 } from './resolvers/categories'
+
 import {
-  typeDefs as serviceDefs,
-  resolvers as serviceResolvers,
-} from './resolvers/services'
+  typeDefs as articleDefs,
+  resolvers as articleResolvers,
+} from './resolvers/articles'
 
 import {
   typeDefs as authDefs,
@@ -38,9 +39,8 @@ const typeDefs = gql`
 `
 
 const server = new ApolloServer({
-  typeDefs: [typeDefs, questionDefs, categoryDefs, serviceDefs, authDefs
-  ],
-  resolvers: merge([questionResolvers, categoryResolvers, serviceResolvers, authResolvers]),
+  typeDefs: [typeDefs, questionDefs, categoryDefs, authDefs, articleDefs],
+  resolvers: merge([questionResolvers, categoryResolvers, authResolvers, articleResolvers]),
 })
 
 const app = express()

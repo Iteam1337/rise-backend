@@ -23,6 +23,18 @@ export type Answers = {
   user: Scalars['String'],
 };
 
+export type Article = {
+   __typename?: 'Article',
+  title: Scalars['String'],
+  type: Scalars['String'],
+  url: Scalars['String'],
+  videoUrl: Scalars['String'],
+  imgUrl: Scalars['String'],
+  categories: Array<Category>,
+  introduction: Scalars['String'],
+  text: Scalars['String'],
+};
+
 export type AuthPayload = {
    __typename?: 'AuthPayload',
   id: Scalars['ID'],
@@ -90,8 +102,8 @@ export type Query = {
   _empty: Maybe<Scalars['String']>,
   questions: Array<Question>,
   categories: Array<Category>,
-  categoryAndRelated: Category,
-  services: Array<Service>,
+  categoryAndRelated: Maybe<Category>,
+  articles: Array<Article>,
 };
 
 
@@ -200,6 +212,7 @@ export type ResolversTypes = {
   Question: ResolverTypeWrapper<Question>,
   Category: ResolverTypeWrapper<Category>,
   Service: ResolverTypeWrapper<Service>,
+  Article: ResolverTypeWrapper<Article>,
   Mutation: ResolverTypeWrapper<{}>,
   Answers: Answers,
   Answer: Answer,
@@ -222,6 +235,7 @@ export type ResolversParentTypes = {
   Question: Question,
   Category: Category,
   Service: Service,
+  Article: Article,
   Mutation: {},
   Answers: Answers,
   Answer: Answer,
@@ -239,6 +253,17 @@ export type ResolversParentTypes = {
 
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Args = {   maxAge: Maybe<Maybe<Scalars['Int']>>,
   scope: Maybe<Maybe<CacheControlScope>> }> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type ArticleResolvers<ContextType = any, ParentType extends ResolversParentTypes['Article'] = ResolversParentTypes['Article']> = {
+  title: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  type: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  url: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  videoUrl: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  imgUrl: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  categories: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>,
+  introduction: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  text: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+};
 
 export type AuthPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthPayload'] = ResolversParentTypes['AuthPayload']> = {
   id: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
@@ -276,8 +301,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   _empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
   questions: Resolver<Array<ResolversTypes['Question']>, ParentType, ContextType>,
   categories: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>,
-  categoryAndRelated: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<QueryCategoryAndRelatedArgs, 'id'>>,
-  services: Resolver<Array<ResolversTypes['Service']>, ParentType, ContextType>,
+  categoryAndRelated: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryCategoryAndRelatedArgs, 'id'>>,
+  articles: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>,
 };
 
 export type QuestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Question'] = ResolversParentTypes['Question']> = {
@@ -301,6 +326,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 }
 
 export type Resolvers<ContextType = any> = {
+  Article: ArticleResolvers<ContextType>,
   AuthPayload: AuthPayloadResolvers<ContextType>,
   Category: CategoryResolvers<ContextType>,
   latestAnswerResponse: LatestAnswerResponseResolvers<ContextType>,
