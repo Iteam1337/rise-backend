@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express'
-import { getArticles } from '../services/articles'
+import { getArticles, getArticleById } from '../services/articles'
 
 export const typeDefs = gql`
   type Article {
@@ -16,11 +16,13 @@ export const typeDefs = gql`
 
   extend type Query {
     articles: [Article!]!
+    article(id: String!): Article!
   }
 `
 
 export const resolvers = {
   Query: {
-    articles: getArticles
+    articles: getArticles,
+    article: async (_: any, { id }: { id: string }) => getArticleById(id)
   },
 }

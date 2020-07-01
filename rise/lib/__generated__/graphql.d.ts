@@ -113,11 +113,17 @@ export type Query = {
   categories: Array<Category>,
   categoryAndRelated: Maybe<Category>,
   articles: Array<Article>,
+  article: Article,
   services: Array<Service>,
 };
 
 
 export type QueryCategoryAndRelatedArgs = {
+  id: Scalars['String']
+};
+
+
+export type QueryArticleArgs = {
   id: Scalars['String']
 };
 
@@ -323,6 +329,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   categories: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>,
   categoryAndRelated: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryCategoryAndRelatedArgs, 'id'>>,
   articles: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>,
+  article: Resolver<ResolversTypes['Article'], ParentType, ContextType, RequireFields<QueryArticleArgs, 'id'>>,
   services: Resolver<Array<ResolversTypes['Service']>, ParentType, ContextType>,
 };
 
