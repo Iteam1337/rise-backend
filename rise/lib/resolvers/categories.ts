@@ -3,6 +3,11 @@ import { getCategories, getCategoryById } from '../services/categories'
 import { getServicesByCategory } from '../services/riseServices'
 
 export const typeDefs = gql`
+  type Image {
+    thumbnailUrl: String!
+    imageUrl: String!
+  }
+
   type Service {
     id: String!
     name: String!
@@ -13,6 +18,7 @@ export const typeDefs = gql`
   type Category {
     id: String!
     label: String!
+    image: Image
     introduction: String!
     information: String!
     services: [Service]
@@ -27,14 +33,14 @@ export const typeDefs = gql`
 export const resolvers = {
   Query: {
     categories: getCategories,
-    categoryAndRelated: async (_ : any, { id }: { id: string }) => {
+    categoryAndRelated: async (_: any, { id }: { id: string }) => {
       const category = await getCategoryById(id)
       const services = await getServicesByCategory(id)
 
       return {
         ...category,
-        services
+        services,
       }
-    }
+    },
   },
 }
