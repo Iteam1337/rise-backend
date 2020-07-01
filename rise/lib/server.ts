@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
@@ -18,12 +19,12 @@ import {
 
 import {
   typeDefs as authDefs,
-  resolvers as authResolvers
+  resolvers as authResolvers,
 } from './resolvers/auth'
 
 import {
   typeDefs as serviceDefs,
-  resolvers as serviceResolvers
+  resolvers as serviceResolvers,
 } from './resolvers/services'
 
 import merge from 'lodash.merge'
@@ -44,14 +45,28 @@ const typeDefs = gql`
 `
 
 const server = new ApolloServer({
-  typeDefs: [typeDefs, questionDefs, categoryDefs, authDefs, articleDefs, serviceDefs],
-  resolvers: merge([questionResolvers, categoryResolvers, authResolvers, articleResolvers, serviceResolvers]),
+  typeDefs: [
+    typeDefs,
+    questionDefs,
+    categoryDefs,
+    authDefs,
+    articleDefs,
+    serviceDefs,
+  ],
+  resolvers: merge([
+    questionResolvers,
+    categoryResolvers,
+    authResolvers,
+    articleResolvers,
+    serviceResolvers,
+  ]),
 })
 
 const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use('/static', express.static(path.join(__dirname, 'static')))
 
 const validateUserToken = (token: string) => token.startsWith('OK')
 
