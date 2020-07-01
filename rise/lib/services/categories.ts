@@ -18,7 +18,7 @@ export const getCategories: QueryResolvers['categories'] = async (
   )
 }
 
-export async function getCategoryById(categoryId: string): Promise<any[]> {
+export async function getCategoryById(categoryId: string): Promise<Category | null> {
   return db.one(
     dedent`
         SELECT
