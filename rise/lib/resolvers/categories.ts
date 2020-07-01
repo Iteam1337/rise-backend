@@ -20,7 +20,7 @@ export const typeDefs = gql`
 
   extend type Query {
     categories: [Category!]!
-    categoryAndRelated(id: String!): Category!
+    categoryAndRelated(id: String!): Category
   }
 `
 
