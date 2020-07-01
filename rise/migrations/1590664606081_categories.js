@@ -12,7 +12,7 @@ exports.up = (knex) => {
         table.string('introduction', 255).notNullable()
         table.string('thumbnail_url', 255).notNullable()
         table.string('image_url', 255).notNullable()
-        table.string('information', 2000).notNullable()
+        table.string('information', 5000).notNullable()
       })
     )
     .then((_) => console.log('***categories migration OK!***'))
