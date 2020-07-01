@@ -9,16 +9,23 @@ export const typeDefs = gql`
   }
 
   input Answer {
-    id: String!
     text: String!
+    id: String!
   }
 
   input Answers {
-    Answers: [Answer]
+    answers: [Answer]
+    user: String!
+  }
+
+  type latestAnswerResponse {
+    createdAt: String!
+    user: String!
   }
 
   extend type Mutation {
     sendAnswers(input: Answers!): Boolean!
+    latestAnswer(id: String!): latestAnswerResponse
   }
 
   extend type Query {

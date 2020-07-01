@@ -21,3 +21,14 @@ export const getAllServices: QueryResolvers['services'] = async (
   `
   )
 }
+
+export async function getServicesByCategory (categoryId: string) {
+  return db.manyOrNone(
+    dedent`
+    SELECT
+	    s.*
+    FROM services s WHERE $1 = ANY(s.categories)
+    `,
+    [categoryId]
+  )
+}
