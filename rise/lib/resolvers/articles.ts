@@ -3,6 +3,7 @@ import { getArticles } from '../services/articles'
 
 export const typeDefs = gql`
   type Article {
+    id: String!
     title: String!
     type: String!
     url: String!

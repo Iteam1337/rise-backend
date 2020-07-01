@@ -7,7 +7,8 @@ export async function getArticles(): Promise<Article[]> {
   const data = await db.manyOrNone(
     dedent`
       SELECT
-        a.title
+        a.id
+        ,a.title
         ,a.type
         ,a.url
         ,a.video_url

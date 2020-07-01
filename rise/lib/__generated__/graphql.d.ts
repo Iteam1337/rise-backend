@@ -25,6 +25,7 @@ export type Answers = {
 
 export type Article = {
    __typename?: 'Article',
+  id: Scalars['String'],
   title: Scalars['String'],
   type: Scalars['String'],
   url: Scalars['String'],
@@ -256,6 +257,7 @@ export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Arg
   scope: Maybe<Maybe<CacheControlScope>> }> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type ArticleResolvers<ContextType = any, ParentType extends ResolversParentTypes['Article'] = ResolversParentTypes['Article']> = {
+  id: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   title: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   type: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   url: Resolver<ResolversTypes['String'], ParentType, ContextType>,
