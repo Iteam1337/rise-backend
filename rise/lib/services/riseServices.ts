@@ -1,10 +1,10 @@
 import { db } from '../adapters/postgres'
 import dedent from 'dedent'
-// import { QueryResolvers } from '../__generated__/graphql'
+import { QueryResolvers } from '../__generated__/graphql'
 
-export const getAllServices: any = async (
-  _parent: any,
-  _args: any
+export const getAllServices: QueryResolvers['services'] = async (
+  _parent,
+  _args
 ) => {
   return await db.manyOrNone(
     dedent`

@@ -104,6 +104,7 @@ export type Query = {
   categories: Array<Category>,
   categoryAndRelated: Maybe<Category>,
   articles: Array<Article>,
+  services: Array<Service>,
 };
 
 
@@ -303,6 +304,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   categories: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>,
   categoryAndRelated: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryCategoryAndRelatedArgs, 'id'>>,
   articles: Resolver<Array<ResolversTypes['Article']>, ParentType, ContextType>,
+  services: Resolver<Array<ResolversTypes['Service']>, ParentType, ContextType>,
 };
 
 export type QuestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Question'] = ResolversParentTypes['Question']> = {
