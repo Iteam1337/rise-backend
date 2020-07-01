@@ -14,7 +14,7 @@ export const getQuestions: QueryResolvers['questions'] = async () => {
   )
 }
 
-export async function latestAnswerByUser(id: string): Promise<any[]> {
+export async function latestAnswerByUser(id: string): Promise<Answer | null> {
   const data = await db.one(
     dedent`
     SELECT a.user, a.created_at
