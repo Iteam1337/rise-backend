@@ -18,9 +18,10 @@ export const typeDefs = gql`
   type Category {
     id: String!
     label: String!
-    image: Image
     introduction: String!
     information: String!
+    imageUrl: String!
+    thumbnailUrl: String!
     services: [Service]
   }
 

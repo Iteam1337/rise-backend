@@ -10,6 +10,8 @@ exports.up = (knex) => {
           .defaultTo(knex.raw('uuid_generate_v4()'))
         table.string('label', 255).notNullable()
         table.string('introduction', 255).notNullable()
+        table.string('thumbnail_url', 255).notNullable()
+        table.string('image_url', 255).notNullable()
         table.string('information', 2000).notNullable()
       })
     )

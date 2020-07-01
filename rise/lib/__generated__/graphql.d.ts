@@ -54,7 +54,15 @@ export type Category = {
   label: Scalars['String'],
   introduction: Scalars['String'],
   information: Scalars['String'],
+  imageUrl: Scalars['String'],
+  thumbnailUrl: Scalars['String'],
   services: Maybe<Array<Maybe<Service>>>,
+};
+
+export type Image = {
+   __typename?: 'Image',
+  thumbnailUrl: Scalars['String'],
+  imageUrl: Scalars['String'],
 };
 
 export type LatestAnswerResponse = {
@@ -225,6 +233,7 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>,
   Subscription: ResolverTypeWrapper<{}>,
   CacheControlScope: CacheControlScope,
+  Image: ResolverTypeWrapper<Image>,
   LogoutResponse: ResolverTypeWrapper<LogoutResponse>,
   Upload: ResolverTypeWrapper<Scalars['Upload']>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
@@ -248,6 +257,7 @@ export type ResolversParentTypes = {
   ID: Scalars['ID'],
   Subscription: {},
   CacheControlScope: CacheControlScope,
+  Image: Image,
   LogoutResponse: LogoutResponse,
   Upload: Scalars['Upload'],
   Int: Scalars['Int'],
@@ -279,7 +289,14 @@ export type CategoryResolvers<ContextType = any, ParentType extends ResolversPar
   label: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   introduction: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   information: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  imageUrl: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  thumbnailUrl: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   services: Resolver<Maybe<Array<Maybe<ResolversTypes['Service']>>>, ParentType, ContextType>,
+};
+
+export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
+  thumbnailUrl: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  imageUrl: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 };
 
 export type LatestAnswerResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['latestAnswerResponse'] = ResolversParentTypes['latestAnswerResponse']> = {
@@ -333,6 +350,7 @@ export type Resolvers<ContextType = any> = {
   Article: ArticleResolvers<ContextType>,
   AuthPayload: AuthPayloadResolvers<ContextType>,
   Category: CategoryResolvers<ContextType>,
+  Image: ImageResolvers<ContextType>,
   latestAnswerResponse: LatestAnswerResponseResolvers<ContextType>,
   LogoutResponse: LogoutResponseResolvers<ContextType>,
   Mutation: MutationResolvers<ContextType>,
