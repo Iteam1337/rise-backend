@@ -26,7 +26,7 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    categories: () => getCategories,
+    categories: getCategories,
     categoryAndRelated: async (_ : any, { id }: { id: string }) => {
       const category = await getCategoryById(id)
       const services = await getServicesByCategory(id)
