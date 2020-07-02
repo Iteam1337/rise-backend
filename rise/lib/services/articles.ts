@@ -1,7 +1,7 @@
 import { db } from '../adapters/postgres'
 import dedent from 'dedent'
 import camelcaseKeys from 'camelcase-keys'
-import { Article } from '../__generated__/graphql'
+import { Article, QueryResolvers } from '../__generated__/graphql'
 
 export async function getArticles(): Promise<Article[]> {
   const data = await db.manyOrNone(
@@ -23,6 +23,16 @@ export async function getArticles(): Promise<Article[]> {
   )
 
   return camelcaseKeys(data)
+}
+
+export const featuredArticle: QueryResolvers['featuredArticle'] = async () => {
+  const articles = await getArticles()
+
+  const [featuredArticle] = articles.filter((article) =>
+    article.title.startsWith('Välkommen')
+  )
+
+  return featuredArticle
 }
 
 export async function getArticleById(articleId: string): Promise<Article> {
